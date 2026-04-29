@@ -1,1 +1,99 @@
+ventoxx_hrv1_mode:
+  alias: "Heat Recovery Ventilation - Speed 1 - START"
+  sequence:
+    - parallel:
+        # Living: HRV, Intake (Forward), Speed 1 (33%)
+        - service: fan.turn_on
+          target: { entity_id: fan.ventoxx_living_room }
+          data: { preset_mode: "Heat Recovery", percentage: 33 }
+        - service: fan.set_direction
+          target: { entity_id: fan.ventoxx_living_room }
+          data: { direction: "forward" }
+        # Kitchen: HRV, Exhaust (Reverse), Speed 1 (33%)
+        - service: fan.turn_on
+          target: { entity_id: fan.ventoxx_kitchen }
+          data: { preset_mode: "Heat Recovery", percentage: 33 }
+        - service: fan.set_direction
+          target: { entity_id: fan.ventoxx_kitchen }
+          data: { direction: "reverse" }
 
+ventoxx_hrv2_mode:
+  alias: "Heat Recovery Ventilation - Speed 2 - START"
+  sequence:
+    - parallel:
+        - service: fan.turn_on
+          target: { entity_id: fan.ventoxx_living_room }
+          data: { preset_mode: "Heat Recovery", percentage: 66 }
+        - service: fan.set_direction
+          target: { entity_id: fan.ventoxx_living_room }
+          data: { direction: "forward" }
+        - service: fan.turn_on
+          target: { entity_id: fan.ventoxx_kitchen }
+          data: { preset_mode: "Heat Recovery", percentage: 66 }
+        - service: fan.set_direction
+          target: { entity_id: fan.ventoxx_kitchen }
+          data: { direction: "reverse" }
+
+ventoxx_hrv3_mode:
+  alias: "Heat Recovery Ventilation - Speed 3 - START"
+  sequence:
+    - parallel:
+        - service: fan.turn_on
+          target: { entity_id: fan.ventoxx_living_room }
+          data: { preset_mode: "Heat Recovery", percentage: 100 }
+        - service: fan.set_direction
+          target: { entity_id: fan.ventoxx_living_room }
+          data: { direction: "forward" }
+        - service: fan.turn_on
+          target: { entity_id: fan.ventoxx_kitchen }
+          data: { preset_mode: "Heat Recovery", percentage: 100 }
+        - service: fan.set_direction
+          target: { entity_id: fan.ventoxx_kitchen }
+          data: { direction: "reverse" }
+
+ventoxx_cooking_mode:
+  alias: "Kitchen Cooking - Exhaust - START"
+  sequence:
+    - parallel:
+        # Living: Normal, Intake (Forward), Speed 3 (100%)
+        - service: fan.turn_on
+          target: { entity_id: fan.ventoxx_living_room }
+          data: { preset_mode: "Normal", percentage: 100 }
+        - service: fan.set_direction
+          target: { entity_id: fan.ventoxx_living_room }
+          data: { direction: "forward" }
+        # Kitchen: Normal, Exhaust (Reverse), Speed 2 (66%)
+        - service: fan.turn_on
+          target: { entity_id: fan.ventoxx_kitchen }
+          data: { preset_mode: "Normal", percentage: 66 }
+        - service: fan.set_direction
+          target: { entity_id: fan.ventoxx_kitchen }
+          data: { direction: "reverse" }
+
+ventoxx_cooking_boost_mode:
+  alias: "Kitchen Cooking - Exhaust BOOST - START"
+  sequence:
+    - parallel:
+        # Living: Boost Preset, Intake (Forward)
+        - service: fan.turn_on
+          target: { entity_id: fan.ventoxx_living_room }
+          data: { preset_mode: "Boost" }
+        - service: fan.set_direction
+          target: { entity_id: fan.ventoxx_living_room }
+          data: { direction: "forward" }
+        # Kitchen: Normal, Exhaust (Reverse), Speed 3 (100%)
+        - service: fan.turn_on
+          target: { entity_id: fan.ventoxx_kitchen }
+          data: { preset_mode: "Normal", percentage: 100 }
+        - service: fan.set_direction
+          target: { entity_id: fan.ventoxx_kitchen }
+          data: { direction: "reverse" }
+
+ventoxx_stop:
+  alias: "Both Ventoxx Units - STOP"
+  sequence:
+    - service: fan.turn_off
+      target:
+        entity_id:
+          - fan.ventoxx_living_room
+          - fan.ventoxx_kitchen
