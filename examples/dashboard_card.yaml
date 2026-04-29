@@ -1,0 +1,65 @@
+type: vertical-stack
+cards:
+  - type: entities
+    title: Ventoxx Master Control
+    entities:
+      - entity: sensor.ventoxx_living_mode
+        name: Living Room Status
+      - entity: sensor.ventoxx_kitchen_mode
+        name: Kitchen Status
+    show_header_toggle: false
+    state_color: true
+
+  - type: horizontal-stack
+    cards:
+      - type: button
+        name: HRV Speed 1
+        show_name: false
+        icon: mdi:fan-speed-1
+        tap_action:
+          action: call-service
+          service: script.ventoxx_hrv1_mode
+        icon_height: 50px
+      - type: button
+        name: HRV Speed 2
+        show_name: false
+        icon: mdi:fan-speed-2
+        tap_action:
+          action: call-service
+          service: script.ventoxx_hrv2_mode
+        icon_height: 50px
+      - type: button
+        name: HRV Speed 3
+        show_name: false
+        icon: mdi:fan-speed-3
+        tap_action:
+          action: call-service
+          service: script.ventoxx_hrv3_mode
+        icon_height: 50px
+
+  - type: horizontal-stack
+    cards:
+      - type: button
+        name: Cooking Exhaust
+        show_name: false
+        icon: mdi:pot-steam-outline
+        tap_action:
+          action: call-service
+          service: script.ventoxx_cooking_mode
+        icon_height: 50px
+      - type: button
+        name: Cooking Boost
+        show_name: false
+        icon: mdi:pot-steam
+        tap_action:
+          action: call-service
+          service: script.ventoxx_cooking_boost_mode
+        icon_height: 50px
+      - type: button
+        name: Stop All
+        show_name: false
+        icon: mdi:stop-circle-outline
+        tap_action:
+          action: call-service
+          service: script.ventoxx_stop
+        icon_height: 50px

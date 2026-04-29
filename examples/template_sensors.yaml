@@ -1,0 +1,55 @@
+template:
+  - sensor:
+      - name: "Ventoxx Living Mode"
+        state: >
+          {% if is_state('fan.ventoxx_living_room', 'off') %}
+            Off
+          {% else %}
+            {% set preset = state_attr('fan.ventoxx_living_room', 'preset_mode') %}
+            {% set pct = state_attr('fan.ventoxx_living_room', 'percentage') | int(0) %}
+            {% set dir = state_attr('fan.ventoxx_living_room', 'direction') %}
+            {% set dir_str = 'Intake' if dir == 'forward' else 'Exhaust' %}
+            
+            {% if preset == 'Boost' %} Boost {{ dir_str }}
+            {% elif preset == 'Night' %} Night Mode
+            {% elif preset == 'Heat Recovery' %}
+              {% set speed = 1 if pct <= 33 else (2 if pct <= 66 else 3) %}
+              HRV Speed {{ speed }} - {{ dir_str }}
+            {% else %}
+              {% set speed = 1 if pct <= 33 else (2 if pct <= 66 else 3) %}
+              Speed {{ speed }} - {{ dir_str }}
+            {% endif %}
+          {% endif %}
+        icon: >
+          {% if is_state('fan.ventoxx_living_room', 'off') %} mdi:fan-off
+          {% elif state_attr('fan.ventoxx_living_room', 'preset_mode') == 'Boost' %} mdi:fan-plus
+          {% elif state_attr('fan.ventoxx_living_room', 'direction') == 'forward' %} mdi:arrow-down-circle
+          {% else %} mdi:arrow-up-circle
+          {% endif %}
+
+      - name: "Ventoxx Kitchen Mode"
+        state: >
+          {% if is_state('fan.ventoxx_kitchen', 'off') %}
+            Off
+          {% else %}
+            {% set preset = state_attr('fan.ventoxx_kitchen', 'preset_mode') %}
+            {% set pct = state_attr('fan.ventoxx_kitchen', 'percentage') | int(0) %}
+            {% set dir = state_attr('fan.ventoxx_kitchen', 'direction') %}
+            {% set dir_str = 'Intake' if dir == 'forward' else 'Exhaust' %}
+            
+            {% if preset == 'Boost' %} Boost {{ dir_str }}
+            {% elif preset == 'Night' %} Night Mode
+            {% elif preset == 'Heat Recovery' %}
+              {% set speed = 1 if pct <= 33 else (2 if pct <= 66 else 3) %}
+              HRV Speed {{ speed }} - {{ dir_str }}
+            {% else %}
+              {% set speed = 1 if pct <= 33 else (2 if pct <= 66 else 3) %}
+              Speed {{ speed }} - {{ dir_str }}
+            {% endif %}
+          {% endif %}
+        icon: >
+          {% if is_state('fan.ventoxx_kitchen', 'off') %} mdi:fan-off
+          {% elif state_attr('fan.ventoxx_kitchen', 'preset_mode') == 'Boost' %} mdi:fan-plus
+          {% elif state_attr('fan.ventoxx_kitchen', 'direction') == 'forward' %} mdi:arrow-down-circle
+          {% else %} mdi:arrow-up-circle
+          {% endif %}
