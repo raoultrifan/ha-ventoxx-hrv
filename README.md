@@ -1,5 +1,10 @@
 # HA-Ventoxx-HRV: Home Assistant Integration for Ventoxx HRV
 
+![Example of card on the Dashboard](/images/Ventoxx_Dashboard.png)
+
+![Example of card on the Dashboard](/images/Ventoxx_integration_slider.png)
+
+
 A fully local, HACS-compatible custom component for Home Assistant to control Ventoxx Harmony Smart Heat Recovery Ventilation units via Wi-Fi.\## Advanced Setup: Dual-Unit Push-Pull Automation
 
 If you have two Ventoxx units (e.g., Kitchen and Living Room), you can create a master controller to keep them in perfect push/pull synchronization.
